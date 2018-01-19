@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="twitchApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitch TV Streaming</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body ng-controller="appController">
+
+<div class="container">
+    <div class="header">
+        <h1 class="display-3 text-center header-text">Twitch Streamers</h1>
+        <p class="lead text-center header-sub-text">Social steam for gamers</p>
+    </div>
+
+    <div class="row" ng-show="holdOn == true">
+        <div class="ml-md-auto col-md-7">
+            <img ng-src="assets/images/loader.gif" alt="">
+        </div>
+    </div>
+
+    <div class="row" ng-hide="holdOn== true" ng-show="holdOn == false">
+        <div class="ml-md-auto col-md-8 mr-md-auto channel" ng-repeat="stream in streamInfo">
+            <ul class="list-group">
+                <a href="https://www.twitch.tv/{{stream.channel}}" target="_blank">
+                    <li class="list-group-item stream-li" style="background-color: {{stream.data.background}};">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img ng-show="stream.data.preview == false" class="round" width="50" height="50"
+                                     avatar="{{ stream.channel }}">
+                                <img ng-if="stream.data.preview" class="rounded-circle" height="50" width="50"
+                                     ng-src="{{ stream.data.preview }}">
+                            </div>
+                            <div class="col-md-8 stream-name">
+                                {{ stream.data.name }}
+                            </div>
+                            <div class="col-md-2 live-badge">
+				  			<span ng-if="stream.data.type" class="badge badge-success">
+								{{ stream.data.type }}
+							</span>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+</body>
+<script type="text/javascript" src="assets/js/angular.min.js"></script>
+<script src="assets/js/lodash.min.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/letter-avatar.js"></script>
+</html>
+
+
+
+
